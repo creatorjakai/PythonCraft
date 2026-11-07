@@ -3,6 +3,18 @@ import time
 import sys
 import os
 
+def error(value, text):
+    if value == 0:
+        current_time = time.strftime("%H:%M:%S")
+        print(f"ERROR: |{current_time}| - {text}")
+    elif value == 1:
+        current_time = time.strftime("%H:%M:%S")
+        print(f"ERROR: |{current_time}| - {text}")
+        print("Killing process...")
+        pygame.quit()
+        sys.exit()
+    
+
 def updateLOADINGbar(progress, total):
     if progress and total == "reset":
         for i in range(980):
@@ -72,7 +84,7 @@ def loadGAME():
     
     updateLOG(f"Loaded {filesloaded} files from assets/items")
 
-    time.sleep(1)
+    time.sleep(0.5)
 
 loadGAME()
 
