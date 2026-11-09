@@ -45,8 +45,17 @@ def loadGAME():
     WINDOW_WIDTH = 1280
     WINDOW_HEIGTH = 720
 
-    icon = pygame.image.load("assets/icons/icon.png")
-    logo = pygame.transform.scale(pygame.image.load("assets/icons/mojanglogo.png"), (500, 450))
+    running = True
+    version = "v26.00f"
+    clock = pygame.time.Clock()
+    filesloaded = 0
+    snapshot = False
+
+    if snapshot:
+        icon = pygame.image.load("assets/icons/snapshot/icon.png")
+    else:
+        icon = pygame.image.load("assets/icons/icon.png")
+    logo = pygame.transform.scale(pygame.image.load("assets/icons/logo/logo.png"), (500, 450))
     updateLOG("Loaded 2 files from assets/icons")
 
     screen = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGTH))
@@ -55,30 +64,25 @@ def loadGAME():
 
     updateLOADINGbar("reset", "reset")
 
-    running = True
-    version = "v26.00d"
-    clock = pygame.time.Clock()
-    filesloaded = 0
-
     block_assets = {}
     item_assets = {}
 
-    for filename in os.listdir("assets/blocks"):
+    for filename in os.listdir("assets/textures/block"):
         if filename.endswith(".png"):
             block_name = filename.removesuffix(".png")
-            block_assets[block_name] = pygame.image.load(f"assets/blocks/{filename}").convert_alpha()
+            block_assets[block_name] = pygame.image.load(f"assets/textures/block/{filename}").convert_alpha()
             filesloaded += 1
             updateLOADINGbar(filesloaded, 1300)
     
-    updateLOG(f"Loaded {filesloaded} files from assets/blocks")
+    updateLOG(f"Loaded {filesloaded} files from assets/textures/block")
 
     filesloaded = 0
     updateLOADINGbar("reset", "glide")
 
-    for filename in os.listdir("assets/items"):
+    for filename in os.listdir("assets/textures/items"):
         if filename.endswith(".png"):
             item_name = filename.removesuffix(".png")
-            item_assets[item_name] = pygame.image.load(f"assets/items/{filename}").convert_alpha()
+            item_assets[item_name] = pygame.image.load(f"assets/textures/items/{filename}").convert_alpha()
             filesloaded += 1
             updateLOADINGbar(filesloaded, 831)
     
