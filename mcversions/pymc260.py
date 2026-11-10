@@ -45,7 +45,7 @@ def loadGAME():
     WINDOW_HEIGHT = 720
 
     running = True
-    version = "v26.01b"
+    version = "v26.01c"
     clock = pygame.time.Clock()
     filesloaded = 0
     snapshot = False
@@ -93,6 +93,7 @@ def loadGAME():
     return mainLOOP()
 
 def mainLOOP():
+    global running
     while running:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -112,11 +113,13 @@ def menuMAIN():
     a3 = pygame.transform.scale(pygame.image.load("assets/icons/background.png"), (1280, 720))
     a4 = pygame.transform.scale(pygame.image.load("assets/textures/buttons/button.png"), (625, 62))
     a5 = pygame.transform.scale(pygame.image.load("assets/textures/buttons/button.png"), (625, 62))
+    a6 = pygame.transform.scale(pygame.image.load("assets/textures/buttons/button.png"), (625, 62))
     screen.blit(a3, (0, 0))
     screen.blit(a1, (WINDOW_WIDTH // 2 - 398, WINDOW_HEIGHT // 2 - 300))
     screen.blit(a2, (WINDOW_WIDTH // 2 - 200, WINDOW_HEIGHT // 2 - 185))
     screen.blit(a4, (WINDOW_WIDTH // 2 - 312, WINDOW_HEIGHT // 2 - 50))
-    screen.blit(a5, (WINDOW_WIDTH // 2 - 312, WINDOW_HEIGHT // 2 - 10))
+    screen.blit(a5, (WINDOW_WIDTH // 2 - 312, WINDOW_HEIGHT // 2 + 25))
+    screen.blit(a6, (WINDOW_WIDTH // 2 - 312, WINDOW_HEIGHT // 2 + 100))
     for event in pygame.event.get():
         if event.type == pygame.MOUSEBUTTONDOWN:
             if a4.collidepoint(event.pos):
@@ -124,6 +127,9 @@ def menuMAIN():
                 return mainLOOP()
             if a5.collidepoint(event.pos):
                 menu = "multiplayer"
+                return mainLOOP()
+            if a6.collidepoint(event.pos):
+                menu = "realms"
                 return mainLOOP()
     pygame.display.flip()
 
